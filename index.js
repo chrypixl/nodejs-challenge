@@ -105,7 +105,7 @@ inquirer
     }
 ]) 
 .then((response) => {
-    const mdPageContent = generateMarkdown(data);
+    const mdPageContent = generateMarkdown(response);
 
     // TODO: Create a function to write README file
     fs.writeFile('readMe.md', mdPageContent, (err) => 

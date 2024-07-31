@@ -2,12 +2,12 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+
 // TODO: Create an array of questions for user input
-inquirer
-    .prompt([    
+const questions = [    
     {
         message:"Enter your Title",
-        name: "Title",
+        name: "title",
         validate: title => {
             if(title){
                 return true;
@@ -19,7 +19,7 @@ inquirer
     },
     {
         message:"Enter your Description",
-        name: "Description",
+        name: "description",
         validate: description => {
             if(description){
                 return true;
@@ -31,7 +31,7 @@ inquirer
     },
     {
         message:"Enter your Installation instructions",
-        name: "Install",
+        name: "dnstall",
         validate: install => {
             if(install){
                 return true;
@@ -43,7 +43,7 @@ inquirer
     },
     {
         message:"Enter your Usage content",
-        name: "Usage",
+        name: "usage",
         validate: usage => {
             if(usage){
                 return true;
@@ -56,7 +56,7 @@ inquirer
     {
         type: "list",
         message:"Choose your License",
-        name: "License",
+        name: "license",
         choices: ["Artistic License 2.0", "ISC", "MIT", "PostgreSQL License", "The Unlicense"],
         validate: license => {
             if(license){
@@ -69,7 +69,7 @@ inquirer
     },
     {
         message:"Enter your Contribution credits",
-        name: "Contributing",
+        name: "contributing",
         validate: contributing => {
             if(contributing){
                 return true;
@@ -81,7 +81,7 @@ inquirer
     },
     {
         message:"Enter your test descriptions",
-        name: "Test",
+        name: "test",
         validate: test => {
             if(test){
                 return true;
@@ -93,7 +93,7 @@ inquirer
     },
     {
         message:"Provide your GitHub username",
-        name: "Questions",
+        name: "questions",
         validate: questions => {
             if(questions){
                 return true;
@@ -103,21 +103,24 @@ inquirer
             }
         }
     }
-]) 
-.then((response) => {
-    const mdPageContent = generateMarkdown(response);
+]; 
 
-    // TODO: Create a function to write README file
-    fs.writeFile('readMe.md', mdPageContent, (err) => 
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, generateMarkdown(data) , (err) => {
         err ? console.log(err) : console.log('ReadMe has been successfully created!')
-    );
-});
+    });
 
-
+};
 
 // TODO: Create a function to initialize app
 function init() {
-
+    inquirer
+        .prompt(questions)
+            .then((data) => {
+                const fileName = "README.md";
+                writeToFile(fileName, data);
+            })
 };
 
 // Function call to initialize app

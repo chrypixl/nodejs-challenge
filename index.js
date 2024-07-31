@@ -1,14 +1,15 @@
 // TODO: Include packages needed for this application
-const inquirer = require("inquirer");
-const fs = require("fs");
+const inquirer = require('inquirer');
+const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 // TODO: Create an array of questions for user input
-const questions = [    
+inquirer
+    .prompt([    
     {
         message:"Enter your Title",
         name: "Title",
-        validate: titleInput => {
-            if(titleInput){
+        validate: title => {
+            if(title){
                 return true;
             } else {
                 console.log('You must enter a title.');
@@ -19,8 +20,8 @@ const questions = [
     {
         message:"Enter your Description",
         name: "Description",
-        validate: descriptionInput => {
-            if(descriptionInput){
+        validate: description => {
+            if(description){
                 return true;
             } else {
                 console.log('You must enter a description.');
@@ -31,8 +32,8 @@ const questions = [
     {
         message:"Enter your Installation instructions",
         name: "Install",
-        validate: installInput => {
-            if(installInput){
+        validate: install => {
+            if(install){
                 return true;
             } else {
                 console.log('You must enter a install.');
@@ -43,8 +44,8 @@ const questions = [
     {
         message:"Enter your Usage content",
         name: "Usage",
-        validate: usageInput => {
-            if(usageInput){
+        validate: usage => {
+            if(usage){
                 return true;
             } else {
                 console.log('You must enter a usage.');
@@ -53,10 +54,12 @@ const questions = [
         }
     },
     {
-        message:"Enter your License",
+        type: "list",
+        message:"Choose your License",
         name: "License",
-        validate: licenseInput => {
-            if(licenseInput){
+        choices: ["Artistic License 2.0", "ISC", "MIT", "PostgreSQL License", "The Unlicense"],
+        validate: license => {
+            if(license){
                 return true;
             } else {
                 console.log('You must enter a license.');
@@ -67,8 +70,8 @@ const questions = [
     {
         message:"Enter your Contribution credits",
         name: "Contributing",
-        validate: contributingInput => {
-            if(contributingInput){
+        validate: contributing => {
+            if(contributing){
                 return true;
             } else {
                 console.log('You must enter a contributing.');
@@ -79,23 +82,43 @@ const questions = [
     {
         message:"Enter your test descriptions",
         name: "Test",
-        validate: testInput => {
-            if(testInput){
+        validate: test => {
+            if(test){
                 return true;
             } else {
                 console.log('You must enter a test.');
                 return false;
             }
         }
+    },
+    {
+        message:"Provide your GitHub username",
+        name: "Questions",
+        validate: questions => {
+            if(questions){
+                return true;
+            } else {
+                console.log('You must enter a username.');
+                return false;
+            }
+        }
     }
-];
+]) 
+.then((response) => {
+    const mdPageContent = generateMarkdown(data);
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+    // TODO: Create a function to write README file
+    fs.writeFile('readMe.md', mdPageContent, (err) => 
+        err ? console.log(err) : console.log('ReadMe has been successfully created!')
+    );
+});
+
 
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+
+};
 
 // Function call to initialize app
 init();

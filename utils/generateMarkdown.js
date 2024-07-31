@@ -61,8 +61,11 @@ ${usage}
 
 ## License
 
+${license}
 
+## Contributions
 
+${contributing}
 
 ## Tests
 

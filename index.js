@@ -31,7 +31,7 @@ const questions = [
     },
     {
         message:"Enter your Installation instructions",
-        name: "dnstall",
+        name: "install",
         validate: install => {
             if(install){
                 return true;
@@ -57,7 +57,7 @@ const questions = [
         type: "list",
         message:"Choose your License",
         name: "license",
-        choices: ["Artistic License 2.0", "ISC", "MIT", "PostgreSQL License", "The Unlicense"],
+        choices: ["Apache-2.0", "EPL-1.0", "ISC", "MIT", "OFL-1.1", "Zlib"],
         validate: license => {
             if(license){
                 return true;

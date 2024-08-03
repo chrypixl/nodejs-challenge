@@ -4,9 +4,10 @@ function renderLicenseBadge(license) {
   if (!license) {
     return '';
   } else {
-    return `[![License: ${license}](https://img.shields.io/badge/License-${license}-blue.svg)]`
+    return `[![License: ${license}](https://img.shields.io/badge/License-${license}-blue.svg)](https://opensource.org/licenses/${license})`
   }
 };
+// 
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
@@ -14,7 +15,7 @@ function renderLicenseLink(license) {
   if (!license) {
     return '';
   } else {
-    return `[License](#license)`;
+    return `(https://opensource.org/licenses/${license})`;
   }
 };
 
@@ -33,6 +34,8 @@ function renderLicenseSection(license) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
+
+
 ## Description
 
 ${data.description}
@@ -53,7 +56,6 @@ ${data.description}
 ${data.install}
 
 
-
 ## Usage
 
 ${data.usage}
@@ -63,9 +65,11 @@ ${data.usage}
 
 ${renderLicenseSection(data.license)}
 
+
 ## Contributions
 
 ${data.contributing}
+
 
 ## Tests
 

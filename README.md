@@ -1,5 +1,11 @@
 # NodeJS-Challenge
 
+See provided link to the demo video, as well as a link to the repo.
+
+[Demo](https://drive.google.com/file/d/1i_cB52gZmeplX1FoAB9I9DY28sUryoO0/view?usp=sharing)
+
+[GitHub Repo](https://github.com/chrypixl/nodejs-challenge)
+
 
 ## Your Task
 
